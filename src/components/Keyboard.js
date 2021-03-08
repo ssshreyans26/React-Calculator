@@ -1,16 +1,24 @@
 import React from "react";
 
 // eslint-disable-next-line
-export default ({ addInput, calculate }) => {
-    function handlekeyDown(e) {
-        e.preventDefault();
-        const current = e.key;
-        const values = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '*', '/'];
-        if (values.includes(current)) {
-            let value = current;
-            addInput((prev) => prev + value);
-        }
+export default ({ addInput, calculate, clearInput }) => {
+  window.addEventListener('keydown', (event) => {
+    var keyPress = event.key;
+    var availableSelection = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '/', '+', '-', '%'];
+
+    if (keyPress === '=') {
+      calculate();
     }
+
+    if (keyPress === 'c') {
+      clearInput();
+    }
+
+    if (availableSelection.includes(keyPress)) {
+        addInput(keyPress);
+    }
+  }, { once: true });
+  
   return (
     <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
       <div style={{ display: "flex", flex: 1 }}>
@@ -20,7 +28,6 @@ export default ({ addInput, calculate }) => {
             onClick={() => {
               addInput("7");
             }}
-            onKeyDown={(e) => handlekeyDown(e)}
           >
             7
           </div>

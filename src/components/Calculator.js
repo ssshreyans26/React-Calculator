@@ -10,7 +10,7 @@ export default () => {
   const addInput = char => {
     var newInput = "";
 
-    if (input.length === 0) {
+    if (input != null && input.length === 0) {
       if (isNaN(Number(char))) {
         newInput = [...input];
         newInput += 0 + char;
@@ -53,7 +53,7 @@ function evaluate(fn) {
     <div className="calc">
       <div className="calcHeader">Calculator</div>
       <Screen input={input} />
-      <Keyboard addInput={addInput} calculate={calculate} />
+      <Keyboard addInput={addInput} calculate={calculate} clearInput={clearInput}/>
       <div className="clearButton" onClick={clearInput}>
         Clear
       </div>
